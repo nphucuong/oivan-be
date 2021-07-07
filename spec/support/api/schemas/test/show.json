@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["success"],
+  "additionalProperties": false,
+  "properties": {
+    "record": { "$ref": "test.json" },
+    "success": { "type": "boolean" }
+  }
+}

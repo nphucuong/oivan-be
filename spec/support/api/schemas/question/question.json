@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "required": ["id", "label", "question_content"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "integer" },
+    "label": { "type": "string" },
+    "question_content": { "type": "string" },
+    "answers": {
+      "type": "array",
+      "items": { "$ref": "../answer/answer.json" }
+    }
+  }
+}

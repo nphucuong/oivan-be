@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["records"],
+  "additionalProperties": false,
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": { "$ref": "answer.json" }
+    }
+  }
+}
