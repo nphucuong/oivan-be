@@ -33,7 +33,7 @@ I applied diversity of skills to show-off. Maybe in real project, we will use al
 
 ### User
 
-Using polymorphic to handler roles (teacher, student)
+Using polymorphic to handle roles (teacher, student)
 
 Gem `devise` supports authentication (login, logout)
 
