@@ -1,24 +1,87 @@
-# README
+# OIVAN Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+- ruby 2.7.1p83
+- Rails 6.1.3.1
 
-* Ruby version
+## Database Setup
 
-* System dependencies
+### Prepare your local database
 
-* Configuration
+- change `config/database.yml` as your local db required
 
-* Database creation
+### DB setup for Development
 
-* Database initialization
+- `rails db:create`
+- `rails db:migrate`
+- `rails teacher:create_first_teacher`
 
-* How to run the test suite
+## Running ELXR Backend
 
-* Services (job queues, cache servers, search engines, etc.)
+- `rails s`
 
-* Deployment instructions
+## Running Test
 
-* ...
+make sure you have `development` and `test` configuration on your `config/database.yml`
+
+- `rspec`
+
+## Outstanding
+
+I applied diversity of skills to show-off. Maybe in real project, we will use alternative gems or solutions.
+
+### User
+
+Using polymorphic to handler roles (teacher, student)
+
+Gem `devise` supports authentication (login, logout)
+
+```
+  http://localhost:3000/users/sign_in
+
+  {
+  "user": {
+      "email": "new_new_teacher@example.com",
+      "password": "12345678"
+  }
+}
+```
+
+Get the token in header to use for other endpoints
+
+### Test
+
+When create tests we need to make sure all questions and answers inside the test are valid.
+
+```ruby
+  def create
+    ActiveRecord::Base.transaction do
+      test = Test.create_test(params)
+      render_record test
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    render_error_message(e)
+  end
+```
+
+Otherwise, we will rollback the data and raise error.
+Besides that, using service file to help clean code.
+
+### Save Student Result
+
+Using scope and callback to calculate the score of test in model StudentTestResult
+
+### Unit tests
+
+```ruby
+  it 'validate json schema' do
+    expect(response).to match_response_schema('test/index')
+  end
+```
+
+I defined a json file to verify data that BE return.
+
+### Serializer
+
+Active Model Serializer

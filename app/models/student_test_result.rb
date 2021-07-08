@@ -16,7 +16,7 @@ class StudentTestResult < ApplicationRecord
     # a.zip(b).map { |x, y| x == y } # [true, false, true]
 
     correct_answer_ids = correct_answers.pluck(:id)
-    matched_correct_answers = correct_answer_ids.zip(self.result).map do |correct_answer, student_answer|
+    matched_correct_answers = correct_answer_ids.zip(result).map do |correct_answer, student_answer|
       correct_answer == student_answer
     end
 
