@@ -12,19 +12,26 @@ class TestsController < ApiController
   end
 
   def create
-    test = Test.create_test(params)
-    if test.present?
-      render json: test
-    else
-      render_bad_request
+    ActiveRecord::Base.transaction do
+      test = Test.create_test(params)
+      render_record test
     end
+  rescue ActiveRecord::RecordInvalid => e
+    render_error_message(e)
   end
 
-  def update; end
+  def update
+    ActiveRecord::Base.transaction do
+      test = Test.update_test(params, @test)
+      render_record test
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    render_error_message(e)
+  end
 
   def destroy
     @test.destroy
-    render render json: { success: true }
+    render json: { success: true }
   end
 
   private
